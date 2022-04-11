@@ -4,11 +4,13 @@ Em is a URL link shortener offering custom links and analytics !
 
 ## Architecture
 
+```
 .
 ├── README.md
 ├── bubba
 │   ├── cupcake
 ├── loins
+```
 
 - **[`Loins`](https://github.com/glamboyosa/Em/blob/main/loins)**: `Loins` is the Elixir Websocket server responsible for handling the logic of creating unique cryptographically secure keys for our short links as well as custom links.
 
