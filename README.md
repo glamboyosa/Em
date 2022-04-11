@@ -1,4 +1,4 @@
-# Em - Create Short Links !
+# Em - Create Short Links ! 🚀 
 
 Em is a URL link shortener offering custom links and analytics !
 
