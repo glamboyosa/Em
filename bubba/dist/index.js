@@ -31,13 +31,13 @@ const mongo_url = (process.env.NODE_ENV === 'development'
     : process.env.MONGO_PROD_URL);
 mongoose_1.default
     .connect(mongo_url)
-    .then((_) => console.log(`Successfully connected to ${process.env.NODE_ENV} db `))
+    .then((_) => console.log(`Successfully connected to ${process.env.NODE_ENV} DB 🚀. `))
     .catch((err) => {
     console.log(JSON.stringify(err));
     throw new Error(err.message);
 });
 const port = (_a = process.env.PORT) !== null && _a !== void 0 ? _a : 5000;
 app.listen(port, () => {
-    console.log(`server started on port ${port}`);
+    console.log(`Server started on port ${port} ⚡️.`);
 });
 //# sourceMappingURL=index.js.map

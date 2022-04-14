@@ -33,7 +33,7 @@ const mongo_url = (
 mongoose
   .connect(mongo_url)
   .then((_) =>
-    console.log(`Successfully connected to ${process.env.NODE_ENV} db `),
+    console.log(`Successfully connected to ${process.env.NODE_ENV} DB 🚀. `),
   )
   .catch((err) => {
     console.log(JSON.stringify(err))
@@ -42,5 +42,5 @@ mongoose
 // start express server on the default port or 5000
 const port = process.env.PORT ?? 5000
 app.listen(port, () => {
-  console.log(`server started on port ${port}`)
+  console.log(`Server started on port ${port} ⚡️.`)
 })
