@@ -1,5 +1,6 @@
 import express from 'express'
 import isEmail from 'validator/lib/isEmail'
+import jwt from 'jsonwebtoken'
 import { TUser } from '../helpers/types'
 import { User } from '../models/users'
 const router = express.Router()
@@ -17,6 +18,15 @@ router.post('/sign-in', async (req, res) => {
     const existingUser = await User.findOne({ email })
 
     if (existingUser) {
+      const token = jwt.sign({ userId: existingUser.id }, process.env.jid!, {
+        expiresIn: '7d',
+      })
+      const maxAge = 1000 * 60 * 60 * 24 * 7 // expires in a week
+      res.cookie('snowman', token, {
+        secure: true,
+        maxAge: maxAge,
+        httpOnly: process.env.NODE_ENV === 'production',
+      })
       return res
         .status(200)
         .send({ message: 'Success', data: existingUser, errors: [] })
@@ -27,12 +37,14 @@ router.post('/sign-in', async (req, res) => {
       email,
     })
     await user.save()
-    const maxAge = 1000 * 60 * 60 * 24 * 5
-    res.cookie('snowman', process.env.jid, {
+    const token = jwt.sign({ userId: user.id }, process.env.jid!, {
+      expiresIn: '7d',
+    })
+    const maxAge = 1000 * 60 * 60 * 24 * 7 // expires in a week
+    res.cookie('snowman', token, {
       secure: true,
       maxAge: maxAge,
-      httpOnly: process.env.NODE_ENV === 'development' ? false : true,
-      signed: true,
+      httpOnly: process.env.NODE_ENV === 'production',
     })
     return res.status(200).send({ message: 'Success', data: user, errors: [] })
   } catch (e) {
@@ -43,7 +55,6 @@ router.post('/sign-in', async (req, res) => {
 })
 
 router.get('/sign-out', async (req, res) => {
-  console.log(JSON.stringify(req.signedCookies))
   res.clearCookie('snowman')
   res.status(200).send({ message: 'Success', data: null, errors: [] })
 })

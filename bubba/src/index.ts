@@ -12,7 +12,7 @@ console.log(path.join(__dirname.split('dist')[0], 'cupcake', 'build'))
 config()
 app.use(cors())
 app.use(express.json())
-app.use(cookieParser(process.env.jid))
+app.use(cookieParser())
 app.use(
   express.static(path.join(__dirname.split('dist')[0], 'cupcake', 'build')),
 )
