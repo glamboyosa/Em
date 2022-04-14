@@ -1,12 +1,17 @@
 import { Schema, model } from 'mongoose'
+import { TUser } from '../helpers/types'
 
-const userSchema = new Schema({
-  name: String,
+const userSchema = new Schema<TUser>({
+  name: {
+    type: String,
+    required: true,
+  },
   email: {
     unique: true,
     type: String,
+    required: true,
   },
-  url: [
+  urls: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Url',
@@ -14,6 +19,6 @@ const userSchema = new Schema({
   ],
 })
 
-const User = model('User', userSchema)
+const User = model<TUser>('User', userSchema)
 
 export { User }

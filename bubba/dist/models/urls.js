@@ -10,7 +10,7 @@ const urlSchema = new mongoose_1.Schema({
         length: 6,
     },
     creationDate: String,
-    userId: {
+    user: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'User',
     },

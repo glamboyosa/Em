@@ -2,20 +2,23 @@ import express from 'express'
 import cors from 'cors'
 import path from 'path'
 import mongoose from 'mongoose'
+import cookieParser from 'cookie-parser'
 import { config } from 'dotenv'
+import redirect from './routes/redirect'
+import auth from './routes/auth'
 const app = express()
+console.log(path.join(__dirname.split('dist')[0], 'cupcake', 'build'))
+
 config()
 app.use(cors())
+app.use(express.json())
+app.use(cookieParser(process.env.jid))
 app.use(
   express.static(path.join(__dirname.split('dist')[0], 'cupcake', 'build')),
 )
-app.use(express.json())
+app.use('/', redirect)
+app.use('/api/auth', auth)
 
-console.log(path.join(__dirname.split('dist')[0], 'cupcake', 'build'))
-
-app.get('/:hash', (_, res) => {
-  res.redirect(301, 'https://github.com/glamboyosa')
-})
 const mongo_url = (
   process.env.NODE_ENV === 'development'
     ? process.env.MONGO_DEV_URL

@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose'
+import { TUrls } from '../helpers/types'
 
-const urlSchema = new Schema({
+const urlSchema = new Schema<TUrls>({
   originalLink: String,
   hash: {
     type: String,
@@ -8,12 +9,12 @@ const urlSchema = new Schema({
     length: 6,
   },
   creationDate: String,
-  userId: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
 })
 
-const Url = model('Url', urlSchema)
+const Url = model<TUrls>('Url', urlSchema)
 
 export { Url }
