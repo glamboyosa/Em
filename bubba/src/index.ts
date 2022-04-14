@@ -6,19 +6,24 @@ import cookieParser from 'cookie-parser'
 import { config } from 'dotenv'
 import redirect from './routes/redirect'
 import auth from './routes/auth'
+import url from './routes/url'
 const app = express()
-console.log(path.join(__dirname.split('dist')[0], 'cupcake', 'build'))
-
 config()
-app.use(cors())
-app.use(express.json())
 app.use(cookieParser())
+console.log(path.join(__dirname.split('dist')[0], 'cupcake', 'build'))
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:3000',
+  }),
+)
+app.use(express.json())
 app.use(
   express.static(path.join(__dirname.split('dist')[0], 'cupcake', 'build')),
 )
 app.use('/', redirect)
 app.use('/api/auth', auth)
-
+app.use('/api/links', url)
 const mongo_url = (
   process.env.NODE_ENV === 'development'
     ? process.env.MONGO_DEV_URL

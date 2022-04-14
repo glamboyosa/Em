@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const isEmail_1 = __importDefault(require("validator/lib/isEmail"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const users_1 = require("../models/users");
 const router = express_1.default.Router();
 router.post('/sign-in', async (req, res) => {
@@ -17,6 +18,15 @@ router.post('/sign-in', async (req, res) => {
     try {
         const existingUser = await users_1.User.findOne({ email });
         if (existingUser) {
+            const token = jsonwebtoken_1.default.sign({ userId: existingUser.id }, process.env.jid, {
+                expiresIn: '7d',
+            });
+            const maxAge = 1000 * 60 * 60 * 24 * 7;
+            res.cookie('snowman', token, {
+                secure: true,
+                maxAge: maxAge,
+                httpOnly: process.env.NODE_ENV === 'production',
+            });
             return res
                 .status(200)
                 .send({ message: 'Success', data: existingUser, errors: [] });
@@ -26,12 +36,14 @@ router.post('/sign-in', async (req, res) => {
             email,
         });
         await user.save();
-        const maxAge = 1000 * 60 * 60 * 24 * 5;
-        res.cookie('snowman', process.env.jid, {
+        const token = jsonwebtoken_1.default.sign({ userId: user.id }, process.env.jid, {
+            expiresIn: '7d',
+        });
+        const maxAge = 1000 * 60 * 60 * 24 * 7;
+        res.cookie('snowman', token, {
             secure: true,
             maxAge: maxAge,
-            httpOnly: process.env.NODE_ENV === 'development' ? false : true,
-            signed: true,
+            httpOnly: process.env.NODE_ENV === 'production',
         });
         return res.status(200).send({ message: 'Success', data: user, errors: [] });
     }
@@ -41,8 +53,7 @@ router.post('/sign-in', async (req, res) => {
             .send({ message: e.message, data: null, errors: [JSON.stringify(e)] });
     }
 });
-router.get('/sign-out', async (req, res) => {
-    console.log(JSON.stringify(req.signedCookies));
+router.get('/sign-out', async (_, res) => {
     res.clearCookie('snowman');
     res.status(200).send({ message: 'Success', data: null, errors: [] });
 });

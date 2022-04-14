@@ -54,7 +54,7 @@ router.post('/sign-in', async (req, res) => {
   }
 })
 
-router.get('/sign-out', async (req, res) => {
+router.get('/sign-out', async (_, res) => {
   res.clearCookie('snowman')
   res.status(200).send({ message: 'Success', data: null, errors: [] })
 })
