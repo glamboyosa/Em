@@ -1,5 +1,3 @@
-type ButtonProps = {
+export type ButtonProps = {
   onSubmit: VoidFunction
 }
-
-export default ButtonProps
