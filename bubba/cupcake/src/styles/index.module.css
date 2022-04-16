@@ -1,0 +1,84 @@
+.flex {
+  display: flex;
+  gap: 2.2rem;
+}
+.appHeader {
+  height: 100vh;
+  position: relative;
+}
+.mainContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: inherit;
+}
+.mainHeading {
+  font-size: 4rem;
+  white-space: nowrap;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+.primaryTagLine {
+  font-size: 3.5rem;
+  white-space: nowrap;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+.secondaryTagLine {
+  font-size: 3rem;
+  white-space: nowrap;
+  line-height: 1.1;
+  margin-bottom: 3rem;
+}
+.animationSpan {
+  padding: 1.5rem;
+  display: inline-block;
+  background-color: var(--orange);
+  perspective: 100rem;
+  transform: rotate3d(1, 1, 1, 2.5deg);
+}
+.animationControls {
+  animation: upanddown 0.6s linear infinite alternate;
+}
+.animations {
+  position: absolute;
+  font-size: 2.5rem;
+}
+.rocketAnimation {
+  left: 3%;
+  top: 16rem;
+}
+.chartAnimation {
+  right: 5%;
+  top: 12rem;
+}
+.lightningAnimation {
+  right: 11%;
+  top: 73rem;
+}
+.confettiAnimation {
+  left: 11%;
+  top: 70rem;
+}
+/* animations */
+
+@keyframes upanddown {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(8%);
+  }
+}
+@media only screen and (max-width: 750px) {
+  .mainHeading {
+    font-size: 3rem;
+  }
+  .primaryTagLine {
+    font-size: 2.5rem;
+  }
+  .secondaryTagLine {
+    font-size: 2rem;
+  }
+}
