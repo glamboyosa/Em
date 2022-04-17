@@ -3,7 +3,7 @@
   padding: 1rem 3rem;
   border: none;
   box-shadow: -4px 4px 0 var(--orange);
-  background-color: white;
   color: var(--base);
   font-family: inherit;
+  cursor: pointer;
 }

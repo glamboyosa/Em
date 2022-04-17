@@ -1,7 +1,13 @@
+import { InputProps } from '../../lib/types'
 import styles from '../../styles/input.module.css'
-const Input = () => {
+const Input = ({ style }: InputProps) => {
   return (
-    <input type="text" className={styles.input} placeholder="Enter a URL." />
+    <input
+      style={style}
+      type="text"
+      className={styles.input}
+      placeholder="Enter a URL."
+    />
   )
 }
 

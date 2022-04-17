@@ -3,6 +3,7 @@
   padding: 1.5rem 3rem;
   outline: none;
   font-family: inherit;
+  font-weight: bolder;
   box-shadow: 4px 4px 7px var(--white-primary);
   perspective: 100rem;
   transform: rotate3d(1, 1, 1, 1.8deg);
