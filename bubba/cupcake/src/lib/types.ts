@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react'
+import { CSSProperties, SyntheticEvent } from 'react'
 export type ButtonProps = {
   onSubmit: VoidFunction
   style: CSSProperties
@@ -8,4 +8,5 @@ export type NavProps = {
 }
 export type InputProps = {
   style: CSSProperties
+  onChange: (e: SyntheticEvent) => void
 }

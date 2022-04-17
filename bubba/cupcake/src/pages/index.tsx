@@ -1,3 +1,4 @@
+import { useRef, SyntheticEvent } from 'react'
 import styles from '../styles/index.module.css'
 import Nav from '../components/navigation/nav'
 import TypeAnimation from 'react-type-animation'
@@ -9,8 +10,14 @@ import usePrefersColorScheme from '../lib/hooks/usePrefersColorScheme'
 const Index = () => {
   const timeOfDay = useTimeOfDay()
   const [colorScheme] = usePrefersColorScheme(timeOfDay)
-  console.log(colorScheme)
+  const url = useRef('')
+  const inputHandler = (event: SyntheticEvent) => {
+    const target = event.target as HTMLInputElement
+
+    url.current = target.value
+  }
   const onSubmitHandler = async () => {}
+  console.log(url.current)
   return (
     <>
       <header className={styles.appHeader}>
@@ -82,6 +89,7 @@ const Index = () => {
           </p>
           <div className={styles.flex}>
             <Input
+              onChange={inputHandler}
               style={
                 colorScheme === 'light'
                   ? { boxShadow: '4px 4px 7px black' }
