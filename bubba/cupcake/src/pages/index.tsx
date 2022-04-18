@@ -1,4 +1,8 @@
 import { useRef, SyntheticEvent } from 'react'
+import { ArrowRightIcon } from '@radix-ui/react-icons'
+import { ReactComponent as Analytics } from '../components/illustrations/Scenes05.svg'
+import { ReactComponent as MadeForYou } from '../components/illustrations/wfh_3.svg'
+import { ReactComponent as Transfer } from '../components/illustrations/concept-of-securing-money-in-business-startup.svg'
 import styles from '../styles/index.module.css'
 import Nav from '../components/navigation/nav'
 import TypeAnimation from 'react-type-animation'
@@ -114,6 +118,41 @@ const Index = () => {
         <h1 className={styles.secondaryHeading}>
           Do more with custom links ⚡️
         </h1>
+        <div className={styles.grid}>
+          <div className={styles.column}>
+            <MadeForYou
+              style={{ marginTop: '1rem' }}
+              height={200}
+              width={200}
+            />
+            <h3>Made for you.</h3>
+            <p className={styles.description}>
+              Instead of boring old short links do more with links customized
+              for you.
+              <p className={[styles.description, styles.whiteSpace].join(' ')}>
+                <span className={styles.link}>em.xyz/ew23rd</span>{' '}
+                <ArrowRightIcon />{' '}
+                <span className={styles.link}>em.xyz/osa</span>{' '}
+              </p>
+            </p>
+          </div>
+          <div className={styles.column}>
+            <Transfer style={{ marginTop: '1rem' }} height={200} width={200} />
+            <h3>Pay for what you use.</h3>
+            <p className={styles.description}>
+              No subscriptions, no recurring bills. We verify the custom link is
+              available and charge you $2 to own it for life.
+            </p>
+          </div>
+          <div className={styles.column}>
+            <Analytics style={{ marginTop: '1rem' }} height={200} width={200} />
+            <h3>Analytics, for you.</h3>
+            <p className={styles.description}>
+              Track clicks and know just how much traffic your site is
+              generating.
+            </p>
+          </div>
+        </div>
       </main>
     </>
   )

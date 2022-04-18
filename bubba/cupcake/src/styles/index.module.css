@@ -2,6 +2,16 @@
   display: flex;
   gap: 2.2rem;
 }
+.grid {
+  display: grid;
+  margin-top: 3rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.whiteSpace {
+  white-space: nowrap;
+}
 .appHeader {
   height: 100vh;
   position: relative;
@@ -64,6 +74,7 @@
 }
 .customLinkSection {
   margin-top: 7rem;
+  margin-bottom: 7rem;
 }
 .secondaryHeading {
   text-align: center;
@@ -72,6 +83,31 @@
   line-height: 1.1;
   margin-bottom: 2rem;
 }
+.column {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 3rem;
+  align-items: center;
+  flex-direction: column;
+  max-height: 40rem;
+}
+
+h3 {
+  font-size: 2rem;
+  line-height: 1.1;
+  margin-top: 2rem;
+}
+.link {
+  background-color: var(--orange);
+  padding: 1rem;
+  cursor: pointer;
+}
+.description {
+  line-height: 1.1;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
 /* animations */
 
 @keyframes upanddown {
@@ -91,5 +127,11 @@
   }
   .secondaryTagLine {
     font-size: 2rem;
+  }
+  .descriptionFlex {
+    flex-direction: column;
+  }
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
   }
 }
