@@ -122,7 +122,7 @@ const Index = () => {
       </header>
       <main className={styles.customLinkSection}>
         <h1 className={styles.secondaryHeading}>
-          Do more with custom links ⚡️
+          Do more with custom links⚡️
         </h1>
         <div className={styles.grid}>
           <div className={styles.column}>

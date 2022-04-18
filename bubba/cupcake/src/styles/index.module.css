@@ -124,19 +124,19 @@ h3 {
 }
 @media only screen and (max-width: 750px) {
   .mainHeading {
-    font-size: 3rem;
+    font-size: 2rem;
   }
   .primaryTagLine {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
   }
   .secondaryTagLine {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   .animationSpan span div {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
-  .descriptionFlex {
-    flex-direction: column;
+  .secondaryHeading {
+    font-size: 2rem;
   }
   .grid {
     grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
