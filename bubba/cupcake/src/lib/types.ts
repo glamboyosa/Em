@@ -10,3 +10,8 @@ export type InputProps = {
   style: CSSProperties
   onChange: (e: SyntheticEvent) => void
 }
+export enum countries {
+  Nigeria = 'NG',
+  England = 'UK',
+  America = 'US',
+}

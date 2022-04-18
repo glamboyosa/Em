@@ -1,19 +1,33 @@
-import { useRef, SyntheticEvent } from 'react'
+import { useRef, SyntheticEvent, useMemo } from 'react'
 import { ArrowRightIcon } from '@radix-ui/react-icons'
 import { ReactComponent as Analytics } from '../components/illustrations/Scenes05.svg'
 import { ReactComponent as MadeForYou } from '../components/illustrations/wfh_3.svg'
 import { ReactComponent as Transfer } from '../components/illustrations/concept-of-securing-money-in-business-startup.svg'
+import { ReactComponent as MoneyTransfer } from '../components/illustrations/men-doing-money-transfer.svg'
 import styles from '../styles/index.module.css'
 import Nav from '../components/navigation/nav'
 import TypeAnimation from 'react-type-animation'
+import icons from 'currency-icons'
 import Input from '../components/input/input'
 import Button from '../components/button/button'
 import useTimeOfDay from '../lib/hooks/useTimeOfDay'
 import usePrefersColorScheme from '../lib/hooks/usePrefersColorScheme'
+import useLocale from '../lib/hooks/useLocale'
+import { countries } from '../lib/types'
 
 const Index = () => {
   const timeOfDay = useTimeOfDay()
   const [colorScheme] = usePrefersColorScheme(timeOfDay)
+  const [{ country }] = useLocale()
+  const currency = useMemo(() => {
+    if (country === countries.Nigeria) {
+      return `${icons['NGN']?.symbol}1000`
+    } else if (country === countries.England) {
+      return `${icons['GBP']?.symbol}2`
+    } else if (country === countries.America) {
+      return `${icons['USD']?.symbol}2`
+    }
+  }, [country])
   const url = useRef('')
   const inputHandler = (event: SyntheticEvent) => {
     const target = event.target as HTMLInputElement
@@ -137,11 +151,23 @@ const Index = () => {
             </p>
           </div>
           <div className={styles.column}>
-            <Transfer style={{ marginTop: '1rem' }} height={200} width={200} />
+            {colorScheme === 'light' ? (
+              <Transfer
+                style={{ marginTop: '1rem' }}
+                height={200}
+                width={200}
+              />
+            ) : (
+              <MoneyTransfer
+                style={{ marginTop: '1rem' }}
+                height={200}
+                width={200}
+              />
+            )}
             <h3>Pay for what you use.</h3>
             <p className={styles.description}>
               No subscriptions, no recurring bills. We verify the custom link is
-              available and charge you $2 to own it for life.
+              available and charge you {currency} to own it for life.
             </p>
           </div>
           <div className={styles.column}>

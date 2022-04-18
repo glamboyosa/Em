@@ -22,11 +22,17 @@ body {
   color: var(--base);
   background-color: var(--white);
 }
+.rect {
+  background-color: white;
+}
 @media (prefers-color-scheme: dark) {
   body {
     box-sizing: border-box;
     font-family: 'Major Mono Display', monospace;
     background-color: var(--base);
     color: var(--white-seconday);
+  }
+  .rect {
+    background-color: var(--base);
   }
 }

@@ -101,6 +101,7 @@ h3 {
   background-color: var(--orange);
   padding: 1rem;
   cursor: pointer;
+  font-weight: bolder;
 }
 .description {
   line-height: 1.1;
