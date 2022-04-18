@@ -6,7 +6,6 @@ import { ReactComponent as Transfer } from '../components/illustrations/concept-
 import { ReactComponent as MoneyTransfer } from '../components/illustrations/men-doing-money-transfer.svg'
 import styles from '../styles/index.module.css'
 import Nav from '../components/navigation/nav'
-import TypeAnimation from 'react-type-animation'
 import ReactTypingEffect from 'react-typing-effect'
 import icons from 'currency-icons'
 import Input from '../components/input/input'
