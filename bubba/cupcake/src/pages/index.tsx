@@ -7,6 +7,7 @@ import { ReactComponent as MoneyTransfer } from '../components/illustrations/men
 import styles from '../styles/index.module.css'
 import Nav from '../components/navigation/nav'
 import TypeAnimation from 'react-type-animation'
+import ReactTypingEffect from 'react-typing-effect'
 import icons from 'currency-icons'
 import Input from '../components/input/input'
 import Button from '../components/button/button'
@@ -91,20 +92,11 @@ const Index = () => {
           <p className={styles.secondaryTagLine}>
             Built for:{' '}
             <span className={styles.animationSpan}>
-              <TypeAnimation
-                cursor={true}
-                sequence={[
-                  'Influencers',
-                  1500,
-                  'Youtubers',
-                  1500,
-                  'Small Businesses',
-                  2000,
-                  'More!',
-                  1500,
-                ]}
-                wrapper="span"
-                repeat={Infinity}
+              <ReactTypingEffect
+                typingDelay={200}
+                eraseSpeed={200}
+                eraseDelay={200}
+                text={['Influencers', 'Youtubers', 'Small Businesses', 'More!']}
               />
             </span>{' '}
           </p>
