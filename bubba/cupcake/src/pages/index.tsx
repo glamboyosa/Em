@@ -16,8 +16,11 @@ const Index = () => {
 
     url.current = target.value
   }
-  const onSubmitHandler = async () => {}
-  console.log(url.current)
+  const onSubmitHandler = async () => {
+    console.log('oj?')
+    console.log(url.current)
+  }
+
   return (
     <>
       <header className={styles.appHeader}>
@@ -92,21 +95,26 @@ const Index = () => {
               onChange={inputHandler}
               style={
                 colorScheme === 'light'
-                  ? { boxShadow: '4px 4px 7px black' }
+                  ? { boxShadow: '4px 4px 7px rgba(0,0,0,0.5)' }
                   : {}
               }
             />
             <Button
               style={
                 colorScheme === 'dark'
-                  ? { backgroundClip: 'white' }
-                  : { backgroundColor: 'black' }
+                  ? { backgroundColor: 'white' }
+                  : { backgroundColor: 'black', color: 'white' }
               }
               onSubmit={onSubmitHandler}
             />
           </div>
         </main>
       </header>
+      <main className={styles.customLinkSection}>
+        <h1 className={styles.secondaryHeading}>
+          Do more with custom links ⚡️
+        </h1>
+      </main>
     </>
   )
 }

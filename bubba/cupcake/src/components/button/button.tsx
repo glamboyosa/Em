@@ -1,7 +1,7 @@
 import { ButtonProps } from '../../lib/types'
 import styles from '../../styles/button.module.css'
 const Button = ({ onSubmit, style }: ButtonProps) => (
-  <button style={style} className={styles.button} onSubmit={onSubmit}>
+  <button style={style} className={styles.button} onClick={onSubmit}>
     Shorten!
   </button>
 )
