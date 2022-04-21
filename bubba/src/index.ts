@@ -3,6 +3,7 @@ import cors from 'cors'
 import path from 'path'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
+import morgan from 'morgan'
 import { config } from 'dotenv'
 import redirect from './routes/redirect'
 import auth from './routes/auth'
@@ -17,6 +18,7 @@ app.use(
     origin: 'http://localhost:3000',
   }),
 )
+app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'tiny'))
 app.use(express.json())
 app.use(
   express.static(path.join(__dirname.split('dist')[0], 'cupcake', 'build')),

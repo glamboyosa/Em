@@ -15,3 +15,12 @@ export enum countries {
   England = 'UK',
   America = 'US',
 }
+
+export type TGenericJWTType = {
+  exp: number
+  name: string
+  iat?: number
+  payload?: {
+    [key: string]: any
+  }
+}

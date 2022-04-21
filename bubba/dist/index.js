@@ -9,6 +9,7 @@ const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const morgan_1 = __importDefault(require("morgan"));
 const dotenv_1 = require("dotenv");
 const redirect_1 = __importDefault(require("./routes/redirect"));
 const auth_1 = __importDefault(require("./routes/auth"));
@@ -21,6 +22,7 @@ app.use((0, cors_1.default)({
     credentials: true,
     origin: 'http://localhost:3000',
 }));
+app.use((0, morgan_1.default)(process.env.NODE_ENV === 'development' ? 'dev' : 'tiny'));
 app.use(express_1.default.json());
 app.use(express_1.default.static(path_1.default.join(__dirname.split('dist')[0], 'cupcake', 'build')));
 app.use('/', redirect_1.default);
