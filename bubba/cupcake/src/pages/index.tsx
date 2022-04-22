@@ -1,5 +1,6 @@
 import { useRef, SyntheticEvent, useMemo } from 'react'
 import { ArrowRightIcon } from '@radix-ui/react-icons'
+import { validate } from 'email-validator'
 import { ReactComponent as Analytics } from '../components/illustrations/Scenes05.svg'
 import { ReactComponent as MadeForYou } from '../components/illustrations/wfh_3.svg'
 import { ReactComponent as Transfer } from '../components/illustrations/concept-of-securing-money-in-business-startup.svg'
@@ -14,11 +15,13 @@ import useTimeOfDay from '../lib/hooks/useTimeOfDay'
 import usePrefersColorScheme from '../lib/hooks/usePrefersColorScheme'
 import useLocale from '../lib/hooks/useLocale'
 import { countries } from '../lib/types'
+import useToast from '../lib/hooks/useToast'
 
 const Index = () => {
   const timeOfDay = useTimeOfDay()
   const [colorScheme] = usePrefersColorScheme(timeOfDay)
   const [{ country }] = useLocale()
+  const [notify] = useToast()
   const currency = useMemo(() => {
     if (country === countries.Nigeria) {
       return `${icons['NGN']?.symbol}1000`
@@ -34,7 +37,12 @@ const Index = () => {
 
     url.current = target.value
   }
-  const onSubmitHandler = async () => {}
+  const onSubmitHandler = async () => {
+    if (!validate(url.current)) {
+      notify('error', 'Invalid website.')
+      return
+    }
+  }
 
   return (
     <>
