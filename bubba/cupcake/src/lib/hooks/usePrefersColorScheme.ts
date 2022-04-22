@@ -1,6 +1,8 @@
 import React from 'react'
 
-const usePrefersColorScheme = (timeOfDay: 'night' | 'day') => {
+const usePrefersColorScheme = (
+  timeOfDay: 'night' | 'day',
+): ['light' | 'dark'] => {
   const [colorScheme, setColorScheme] = React.useState<'light' | 'dark'>(() =>
     timeOfDay === 'day' ? 'light' : 'dark',
   )

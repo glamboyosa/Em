@@ -1,5 +1,10 @@
 import React from 'react'
-const useLocale = () => {
+const useLocale = (): [
+  {
+    locale: string
+    country: string
+  },
+] => {
   const states = React.useMemo(
     () => [
       'Abia',
