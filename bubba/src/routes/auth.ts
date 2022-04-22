@@ -58,4 +58,25 @@ router.get('/sign-out', async (_, res) => {
   res.clearCookie('snowman')
   res.status(200).send({ message: 'Success', data: null, errors: [] })
 })
+router.get('/me', async (req, res) => {
+  const cookie = req.cookies.snowman
+
+  if (!cookie) {
+    return res.status(401).send({
+      message: 'Something went wrong. User is unauthenticated.',
+      data: null,
+      errors: ['user is unauthenticated'],
+    })
+  }
+
+  try {
+    const user = await User.findById(req.query.id)
+    return res.status(200).send({ message: 'Success', data: user, errors: [] })
+  } catch (e) {
+    return res
+      .status(404)
+      .send({ message: e.message, data: null, errors: [JSON.stringify(e)] })
+  }
+})
+
 export default router
