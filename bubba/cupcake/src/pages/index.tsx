@@ -21,7 +21,7 @@ const Index = () => {
   const timeOfDay = useTimeOfDay()
   const [colorScheme] = usePrefersColorScheme(timeOfDay)
   const [{ country }] = useLocale()
-  const [notify] = useToast()
+  const [notify, ToastContainer] = useToast()
   const currency = useMemo(() => {
     if (country === countries.Nigeria) {
       return `${icons['NGN']?.symbol}1000`
@@ -46,6 +46,7 @@ const Index = () => {
 
   return (
     <>
+      <ToastContainer />
       <header className={styles.appHeader}>
         <Nav
           style={
