@@ -38,7 +38,7 @@ type TUrls = {
 }
 export type TUserContext = {
   user: TUser | null
-  setUser: React.Dispatch<React.SetStateAction<TUser | null>>
+  setUserToContext: (user: TUser) => void
 }
 export type ContextProviderProps = {
   children: React.ReactNode

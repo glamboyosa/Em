@@ -14,11 +14,8 @@ import useTimeOfDay from '../lib/hooks/useTimeOfDay'
 import usePrefersColorScheme from '../lib/hooks/usePrefersColorScheme'
 import useLocale from '../lib/hooks/useLocale'
 import { countries } from '../lib/types'
-import useCookie from '../lib/hooks/useCookie'
 
 const Index = () => {
-  const { value, loading, isJWTExpired, allCookiesList } = useCookie('_ga')
-  
   const timeOfDay = useTimeOfDay()
   const [colorScheme] = usePrefersColorScheme(timeOfDay)
   const [{ country }] = useLocale()
@@ -37,10 +34,7 @@ const Index = () => {
 
     url.current = target.value
   }
-  const onSubmitHandler = async () => {
-    
-    
-  }
+  const onSubmitHandler = async () => {}
 
   return (
     <>
