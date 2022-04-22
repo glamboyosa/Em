@@ -1,4 +1,4 @@
-import { CSSProperties, SyntheticEvent } from 'react'
+import React, { CSSProperties, SyntheticEvent } from 'react'
 export type ButtonProps = {
   onSubmit: VoidFunction
   style: CSSProperties
@@ -23,4 +23,23 @@ export type TGenericJWTType = {
   payload?: {
     [key: string]: any
   }
+}
+export type TUser = {
+  name: string
+  email: string
+  urls?: TUrls[]
+}
+
+type TUrls = {
+  originalLink: string
+  hash: string
+  creationDate: string
+  user?: TUser
+}
+export type TUserContext = {
+  user: TUser | null
+  setUser: React.Dispatch<React.SetStateAction<TUser | null>>
+}
+export type ContextProviderProps = {
+  children: React.ReactNode
 }
