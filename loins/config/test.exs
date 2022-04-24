@@ -7,9 +7,8 @@ config :loins, LoinsWeb.Endpoint,
   secret_key_base: "PGq0chEgA5Y12CMKT2xl6SnVw3vwO9E1LZOvWjGrzxUD4p4RYB/O+21v0gJOj41A",
   server: false
 
-# In test we don't send emails.
-config :loins, Loins.Mailer,
-  adapter: Swoosh.Adapters.Test
+# Mailer
+config :loins, Loins.Mail.Mailer, adapter: Bamboo.LocalAdapter
 
 # Print only warnings and errors during test
 config :logger, level: :warn

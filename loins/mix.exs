@@ -20,7 +20,8 @@ defmodule Loins.MixProject do
   def application do
     [
       mod: {Loins.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      applications: [:bamboo],
+      extra_applications: [:logger, :runtime_tools, :jason]
     ]
   end
 
@@ -40,7 +41,8 @@ defmodule Loins.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:bamboo, github: "thoughtbot/bamboo"}
     ]
   end
 
