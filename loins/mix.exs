@@ -20,7 +20,7 @@ defmodule Loins.MixProject do
   def application do
     [
       mod: {Loins.Application, []},
-      applications: [:bamboo],
+      applications: [:bamboo, :memento, :phoenix_pubsub],
       extra_applications: [:logger, :runtime_tools, :jason]
     ]
   end
@@ -42,7 +42,9 @@ defmodule Loins.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:bamboo, github: "thoughtbot/bamboo"}
+      {:bamboo, github: "thoughtbot/bamboo", override: true},
+      {:memento, "~> 0.3.2"},
+      {:bamboo_phoenix, github: "thoughtbot/bamboo_phoenix"}
     ]
   end
 
