@@ -24,3 +24,5 @@ loins-*.tar
 
 .env
 **/*.secret.exs
+
+Mnesia.nonode@nohost/

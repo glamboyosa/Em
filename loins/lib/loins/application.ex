@@ -1,4 +1,6 @@
 defmodule Loins.Application do
+  import Loins.Schema.Setup
+  alias Loins.Schema.OTP
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -18,6 +20,8 @@ defmodule Loins.Application do
       # {Loins.Worker, arg}
     ]
 
+    # setup Mnesia
+    setup_db([OTP])
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Loins.Supervisor]
