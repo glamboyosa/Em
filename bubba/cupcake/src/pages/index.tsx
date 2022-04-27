@@ -1,4 +1,4 @@
-import { useRef, SyntheticEvent, useMemo } from 'react'
+import { useRef, SyntheticEvent, useMemo, useState } from 'react'
 import { ArrowRightIcon } from '@radix-ui/react-icons'
 import { validate } from 'email-validator'
 import { ReactComponent as Analytics } from '../components/illustrations/Scenes05.svg'
@@ -16,11 +16,13 @@ import usePrefersColorScheme from '../lib/hooks/usePrefersColorScheme'
 import useLocale from '../lib/hooks/useLocale'
 import { countries } from '../lib/types'
 import useToast from '../lib/hooks/useToast'
+import useProgress from '../lib/hooks/useProgress'
 
 const Index = () => {
   const timeOfDay = useTimeOfDay()
   const [colorScheme] = usePrefersColorScheme(timeOfDay)
   const [{ country }] = useLocale()
+  const { Progress, stopProgress } = useProgress()
   const [notify, ToastContainer] = useToast()
   const currency = useMemo(() => {
     if (country === countries.Nigeria) {
@@ -32,16 +34,21 @@ const Index = () => {
     }
   }, [country])
   const url = useRef('')
+  const [buttonChild, setButtonChild] = useState<JSX.Element | string>(
+    'Shorten!',
+  )
+  const [loading, setLoading] = useState(false)
+  const [data, setData] = useState([])
   const inputHandler = (event: SyntheticEvent) => {
     const target = event.target as HTMLInputElement
 
     url.current = target.value
   }
   const onSubmitHandler = async () => {
-    if (!validate(url.current)) {
-      notify('error', 'Invalid website.')
-      return
-    }
+    // if (!url.current.includes(".")) {
+    //   notify('error', 'Invalid website.')
+    //   return
+    // }
   }
 
   return (
@@ -121,7 +128,9 @@ const Index = () => {
                   : { backgroundColor: 'black', color: 'white' }
               }
               onSubmit={onSubmitHandler}
-            />
+            >
+              {buttonChild}
+            </Button>
           </div>
         </main>
       </header>

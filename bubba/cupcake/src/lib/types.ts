@@ -2,6 +2,7 @@ import React, { CSSProperties, SyntheticEvent } from 'react'
 export type ButtonProps = {
   onSubmit: VoidFunction
   style: CSSProperties
+  children: React.ReactNode
 }
 export type NavProps = {
   style: CSSProperties
