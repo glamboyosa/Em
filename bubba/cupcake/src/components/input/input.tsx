@@ -1,15 +1,16 @@
-import { InputProps } from '../../lib/types'
+import { forwardRef } from 'react'
+import { InputProps, InputRef } from '../../lib/types'
 import styles from '../../styles/input.module.css'
-const Input = ({ style, onChange }: InputProps) => {
+const Input = forwardRef<InputRef, InputProps>(({ style }, ref) => {
   return (
     <input
       style={style}
       type="text"
-      onChange={onChange}
+      ref={ref}
       className={styles.input}
       placeholder="Enter a URL."
     />
   )
-}
+})
 
 export default Input

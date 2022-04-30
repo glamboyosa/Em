@@ -1,6 +1,6 @@
-import { useRef, SyntheticEvent, useMemo, useState } from 'react'
+import { useRef, useMemo, useState, useEffect } from 'react'
 import { ArrowRightIcon } from '@radix-ui/react-icons'
-import { validate } from 'email-validator'
+import 'react-toastify/dist/ReactToastify.css'
 import { ReactComponent as Analytics } from '../components/illustrations/Scenes05.svg'
 import { ReactComponent as MadeForYou } from '../components/illustrations/wfh_3.svg'
 import { ReactComponent as Transfer } from '../components/illustrations/concept-of-securing-money-in-business-startup.svg'
@@ -11,10 +11,11 @@ import ReactTypingEffect from 'react-typing-effect'
 import icons from 'currency-icons'
 import Input from '../components/input/input'
 import Button from '../components/button/button'
+import Check from '../components/check/check'
 import useTimeOfDay from '../lib/hooks/useTimeOfDay'
 import usePrefersColorScheme from '../lib/hooks/usePrefersColorScheme'
 import useLocale from '../lib/hooks/useLocale'
-import { countries } from '../lib/types'
+import { ButtonRef, countries, InputRef } from '../lib/types'
 import useToast from '../lib/hooks/useToast'
 import useProgress from '../lib/hooks/useProgress'
 
@@ -22,7 +23,7 @@ const Index = () => {
   const timeOfDay = useTimeOfDay()
   const [colorScheme] = usePrefersColorScheme(timeOfDay)
   const [{ country }] = useLocale()
-  const { Progress, stopProgress } = useProgress()
+  const { Progress, startProgress } = useProgress()
   const [notify, ToastContainer] = useToast()
   const currency = useMemo(() => {
     if (country === countries.Nigeria) {
@@ -33,23 +34,43 @@ const Index = () => {
       return `${icons['USD']?.symbol}2`
     }
   }, [country])
-  const url = useRef('')
-  const [buttonChild, setButtonChild] = useState<JSX.Element | string>(
-    'Shorten!',
-  )
+  const inputRef = useRef<InputRef | null>(null!)
+  const buttonRef = useRef<ButtonRef | null>(null!)
+  const buttonChild = useRef<JSX.Element | string>('Shorten!')
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState([])
-  const inputHandler = (event: SyntheticEvent) => {
-    const target = event.target as HTMLInputElement
 
-    url.current = target.value
-  }
   const onSubmitHandler = async () => {
-    // if (!url.current.includes(".")) {
-    //   notify('error', 'Invalid website.')
-    //   return
-    // }
+    if (!inputRef.current!.value.includes('.')) {
+      notify('error', 'Invalid website.')
+      return
+    }
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+      setData(
+        (prevData) =>
+          prevData.concat([inputRef.current!.value as never]) as any,
+      )
+    }, 3500)
   }
+  if (!loading && !data.length) {
+    buttonChild.current = 'Shorten!'
+  } else if (loading && !data.length) {
+    buttonChild.current = <Progress />
+    startProgress()
+  } else if (!loading && data.length) {
+    buttonChild.current = <Check />
+  }
+
+  useEffect(() => {
+    if (!loading && data.length && inputRef.current?.value) {
+      inputRef.current.value = ''
+      setTimeout(() => {
+        buttonRef.current!.innerHTML = 'Shorten!'
+      }, 1500)
+    }
+  }, [data, loading])
 
   return (
     <>
@@ -114,7 +135,7 @@ const Index = () => {
           </p>
           <div className={styles.flex}>
             <Input
-              onChange={inputHandler}
+              ref={inputRef}
               style={
                 colorScheme === 'light'
                   ? { boxShadow: '4px 4px 7px rgba(0,0,0,0.5)' }
@@ -122,6 +143,7 @@ const Index = () => {
               }
             />
             <Button
+              ref={buttonRef}
               style={
                 colorScheme === 'dark'
                   ? { backgroundColor: 'white' }
@@ -129,7 +151,7 @@ const Index = () => {
               }
               onSubmit={onSubmitHandler}
             >
-              {buttonChild}
+              {buttonChild.current}
             </Button>
           </div>
         </main>

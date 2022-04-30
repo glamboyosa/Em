@@ -1,4 +1,4 @@
-import React, { CSSProperties, SyntheticEvent } from 'react'
+import React, { CSSProperties } from 'react'
 export type ButtonProps = {
   onSubmit: VoidFunction
   style: CSSProperties
@@ -9,8 +9,9 @@ export type NavProps = {
 }
 export type InputProps = {
   style: CSSProperties
-  onChange: (e: SyntheticEvent) => void
 }
+export type ButtonRef = HTMLButtonElement
+export type InputRef = HTMLInputElement
 export enum countries {
   Nigeria = 'NG',
   England = 'UK',

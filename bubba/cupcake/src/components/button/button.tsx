@@ -1,11 +1,19 @@
-import { ButtonProps } from '../../lib/types'
+import { forwardRef } from 'react'
+import { ButtonProps, ButtonRef } from '../../lib/types'
 import styles from '../../styles/button.module.css'
-const Button = ({ onSubmit, style, children }: ButtonProps) => {
-  return (
-    <button style={style} className={styles.button} onClick={onSubmit}>
-      {children}
-    </button>
-  )
-}
+const Button = forwardRef<ButtonRef, ButtonProps>(
+  ({ onSubmit, style, children }, ref) => {
+    return (
+      <button
+        ref={ref}
+        style={style}
+        className={styles.button}
+        onClick={onSubmit}
+      >
+        {children}
+      </button>
+    )
+  },
+)
 
 export default Button
