@@ -33,7 +33,7 @@ export type TUser = {
   urls?: TUrls[]
 }
 
-type TUrls = {
+export type TUrls = {
   originalLink: string
   hash: string
   creationDate: string
@@ -45,4 +45,9 @@ export type TUserContext = {
 }
 export type ContextProviderProps = {
   children: React.ReactNode
+}
+export type TLocalStorage = {
+  originalLink: string
+  hashedLink: string
+  hash: string
 }
