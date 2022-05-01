@@ -3,6 +3,7 @@ export type ButtonProps = {
   onSubmit: VoidFunction
   style: CSSProperties
   children: React.ReactNode
+  disabled: boolean
 }
 export type NavProps = {
   style: CSSProperties

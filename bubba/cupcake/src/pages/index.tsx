@@ -17,14 +17,13 @@ import usePrefersColorScheme from '../lib/hooks/usePrefersColorScheme'
 import useLocale from '../lib/hooks/useLocale'
 import { ButtonRef, countries, InputRef } from '../lib/types'
 import useToast from '../lib/hooks/useToast'
-import useProgress from '../lib/hooks/useProgress'
 
 const Index = () => {
   const timeOfDay = useTimeOfDay()
   const [colorScheme] = usePrefersColorScheme(timeOfDay)
   const [{ country }] = useLocale()
-  const { Progress, startProgress } = useProgress()
   const [notify, ToastContainer] = useToast()
+
   const currency = useMemo(() => {
     if (country === countries.Nigeria) {
       return `${icons['NGN']?.symbol}1000`
@@ -34,9 +33,10 @@ const Index = () => {
       return `${icons['USD']?.symbol}2`
     }
   }, [country])
+
   const inputRef = useRef<InputRef | null>(null!)
   const buttonRef = useRef<ButtonRef | null>(null!)
-  const buttonChild = useRef<JSX.Element | string>('Shorten!')
+
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState([])
 
@@ -53,14 +53,6 @@ const Index = () => {
           prevData.concat([inputRef.current!.value as never]) as any,
       )
     }, 3500)
-  }
-  if (!loading && !data.length) {
-    buttonChild.current = 'Shorten!'
-  } else if (loading && !data.length) {
-    buttonChild.current = <Progress />
-    startProgress()
-  } else if (!loading && data.length) {
-    buttonChild.current = <Check />
   }
 
   useEffect(() => {
@@ -144,6 +136,7 @@ const Index = () => {
             />
             <Button
               ref={buttonRef}
+              disabled={loading}
               style={
                 colorScheme === 'dark'
                   ? { backgroundColor: 'white' }
@@ -151,7 +144,7 @@ const Index = () => {
               }
               onSubmit={onSubmitHandler}
             >
-              {buttonChild.current}
+              {!loading && !data.length ? 'Shorten!' : <Check />}
             </Button>
           </div>
         </main>
